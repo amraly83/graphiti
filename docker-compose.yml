@@ -27,7 +27,7 @@ services:
       - NEO4J_PASSWORD=${NEO4J_PASSWORD}
       - PORT=8000
   neo4j:
-    image: neo4j:5.26.2
+    image: graphstack/dozerdb:5.26.3.0
     healthcheck:
       test: wget "http://localhost:${NEO4J_PORT}" || exit 1
       interval: 1s
@@ -41,6 +41,10 @@ services:
       - neo4j_data:/data
     environment:
       - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+      - 'NEO4J_PLUGINS=''["apoc"]'''
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - "NEO4J_dbms_security_procedures_unrestricted='*'"
 
 volumes:
   neo4j_data:
