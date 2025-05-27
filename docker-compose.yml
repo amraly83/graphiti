@@ -27,20 +27,7 @@ services:
       - NEO4J_USER=${NEO4J_USER}
       - NEO4J_PASSWORD=${NEO4J_PASSWORD}
   neo4j:
-    image: graphstack/dozerdb:5.26.3.0
-    networks:
-      - j80888c0ssg4kgwkokw0s4ww
-    restart: always
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - 'wget -qO- http://127.0.0.1:7474/'
-      interval: 5s
-      timeout: 20s
-      retries: 10
-    ports:
-      - '7475:7474'
-      - '7688:7687'
+    image: 'graphstack/dozerdb:5.26.3.0'
     volumes:
       - '/$HOME/neo4j/logs:/logs'
       - '/$HOME/neo4j/config:/config'
@@ -53,6 +40,19 @@ services:
       - NEO4J_apoc_export_file_enabled=true
       - NEO4J_apoc_import_file_enabled=true
       - "NEO4J_dbms_security_procedures_unrestricted='*'"
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    networks:
+      - j80888c0ssg4kgwkokw0s4ww
+    restart: always
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'wget -qO- http://127.0.0.1:7474/'
+      interval: 5s
+      timeout: 20s
+      retries: 10
 networks:
   j80888c0ssg4kgwkokw0s4ww:
     external: true
