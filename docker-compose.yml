@@ -20,7 +20,6 @@ services:
       timeout: 5s
       retries: 3
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - NEO4J_URI=bolt://neo4j:${NEO4J_PORT}
       - NEO4J_USER=${NEO4J_USER}
