@@ -19,9 +19,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    depends_on:
-      neo4j:
-        condition: service_healthy
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
